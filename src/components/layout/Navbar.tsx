@@ -83,7 +83,7 @@ export const Navbar = () => {
         {/* Mobile Menu */}
         {isOpen && (
           <motion.div
-            className="md:hidden mt-4 space-y-3 pb-4"
+            className="md:hidden mt-4 space-y-3 pb-4 bg-slate-950/95 backdrop-blur-md rounded-lg px-4 py-4 border border-slate-800"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}

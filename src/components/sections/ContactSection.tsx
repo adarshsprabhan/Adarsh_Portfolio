@@ -82,43 +82,45 @@ export const ContactSection = () => {
             </motion.div>
 
             {/* Contact Info */}
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="space-y-6">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <a key={index} href={info.href} className="group">
-                    <Card variant="glass" className="h-full hover:border-cyan-400 transition-colors">
-                      <CardContent className="flex items-start gap-4 pt-6">
-                        <div className="p-3 bg-cyan-500/10 rounded-lg group-hover:bg-cyan-500/20 transition-colors flex-shrink-0">
-                          <Icon className="text-cyan-400" size={24} />
-                        </div>
-                        <div className="min-w-0 flex-1 max-w-full">
-                          <p className="text-slate-400 text-sm truncate">{info.label}</p>
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
+              <Card variant="glass" className="mb-6">
+                <CardContent className="pt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {contactInfo.map((info, index) => {
+                      const Icon = info.icon;
+                      return (
+                        <a key={index} href={info.href} className="flex flex-col items-center text-center group hover:opacity-80 transition-opacity">
+                          <div className="p-3 bg-cyan-500/10 rounded-lg group-hover:bg-cyan-500/20 transition-colors mb-3">
+                            <Icon className="text-cyan-400" size={24} />
+                          </div>
+                          <p className="text-slate-400 text-sm mb-1">{info.label}</p>
                           <p className="text-white font-semibold break-words">{info.value}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </a>
-                );
-              })}
+                        </a>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Social Links */}
-              <div className="pt-6 border-t border-slate-700">
-                <h3 className="text-white font-semibold mb-4">Follow Me</h3>
-                <div className="flex gap-4">
-                  {SOCIAL_LINKS.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`text-slate-400 hover:text-white transition-colors ${link.color}`}
-                    >
-                      {link.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
+              <Card variant="glass">
+                <CardContent className="pt-6">
+                  <h3 className="text-white font-semibold mb-4">Follow Me</h3>
+                  <div className="flex gap-4">
+                    {SOCIAL_LINKS.map((link) => (
+                      <a
+                        key={link.name}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-slate-400 hover:text-white transition-colors ${link.color}`}
+                      >
+                        {link.name}
+                      </a>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </motion.div>
