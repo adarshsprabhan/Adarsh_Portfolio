@@ -14,6 +14,15 @@ export const AboutSection = () => {
     { icon: Target, label: 'Problem Solver', description: 'Creative solutions to complex challenges' },
   ];
 
+  const handleResumeDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
+    link.download = 'Adarsh_Sindhu_Prabhan_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section id="about" className="w-full py-20 px-4 md:px-8 bg-slate-950">
       <div className="max-w-7xl mx-auto">
@@ -24,7 +33,7 @@ export const AboutSection = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
             <div className="space-y-4">
               <p className="text-lg text-slate-300 leading-relaxed">{PORTFOLIO_DATA.description}</p>
-              <Button variant="primary" size="md">
+              <Button variant="primary" size="md" onClick={handleResumeDownload}>
                 Download Resume
               </Button>
             </div>

@@ -1,0 +1,13 @@
+IMPORTANT: You need to add your actual resume PDF file
+
+To make the resume downloadable:
+
+1. Save your resume as a PDF file
+2. Place it in: public/resume.pdf
+
+The download button will then work automatically!
+
+File location should be:
+/Users/adarshsprabhan/Desktop/Cluade code/portfolio/public/resume.pdf
+
+Then commit and push to GitHub.

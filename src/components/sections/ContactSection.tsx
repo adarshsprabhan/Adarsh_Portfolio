@@ -8,14 +8,11 @@ import { Button } from '@/components/ui/Button';
 import { PORTFOLIO_DATA, SOCIAL_LINKS } from '@/data/portfolio';
 
 export const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const target = e.currentTarget;
+    target.submit();
   };
 
   const contactInfo = [
@@ -39,13 +36,12 @@ export const ContactSection = () => {
                   <CardTitle>Send me a message</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} action="https://formspree.io/f/xzzzwpwj" method="POST" className="space-y-4">
                     <div>
                       <input
                         type="text"
                         placeholder="Your Name"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        name="name"
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
                         required
                       />
@@ -54,8 +50,7 @@ export const ContactSection = () => {
                       <input
                         type="email"
                         placeholder="Your Email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        name="email"
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
                         required
                       />
@@ -64,8 +59,7 @@ export const ContactSection = () => {
                       <input
                         type="text"
                         placeholder="Subject"
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        name="subject"
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
                         required
                       />
@@ -73,8 +67,7 @@ export const ContactSection = () => {
                     <div>
                       <textarea
                         placeholder="Your Message"
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        name="message"
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors h-32 resize-none"
                         required
                       />
@@ -83,11 +76,6 @@ export const ContactSection = () => {
                       <Send size={18} />
                       Send Message
                     </Button>
-                    {submitted && (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center text-cyan-400 text-sm">
-                        ✓ Message sent! I'll get back to you soon.
-                      </motion.div>
-                    )}
                   </form>
                 </CardContent>
               </Card>
@@ -100,13 +88,13 @@ export const ContactSection = () => {
                 return (
                   <a key={index} href={info.href} className="group">
                     <Card variant="glass" className="h-full hover:border-cyan-400 transition-colors">
-                      <CardContent className="flex items-center gap-4 pt-6">
-                        <div className="p-3 bg-cyan-500/10 rounded-lg group-hover:bg-cyan-500/20 transition-colors">
+                      <CardContent className="flex items-start gap-4 pt-6">
+                        <div className="p-3 bg-cyan-500/10 rounded-lg group-hover:bg-cyan-500/20 transition-colors flex-shrink-0">
                           <Icon className="text-cyan-400" size={24} />
                         </div>
-                        <div>
+                        <div className="min-w-0 flex-1">
                           <p className="text-slate-400 text-sm">{info.label}</p>
-                          <p className="text-white font-semibold">{info.value}</p>
+                          <p className="text-white font-semibold break-words">{info.value}</p>
                         </div>
                       </CardContent>
                     </Card>

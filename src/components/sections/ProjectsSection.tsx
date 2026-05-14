@@ -2,10 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
 import { PROJECTS } from '@/data/portfolio';
 
 export const ProjectsSection = () => {
@@ -56,17 +54,6 @@ export const ProjectsSection = () => {
                         ))}
                       </ul>
                     </div>
-                    <div className="flex gap-3 pt-4">
-                      <Button
-                        variant="primary"
-                        size="sm"
-                        onClick={() => window.open(project.github, '_blank')}
-                        className="flex items-center gap-2"
-                      >
-                        <Code2 size={16} />
-                        View Code
-                      </Button>
-                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -92,22 +79,13 @@ export const ProjectsSection = () => {
                         <CardDescription>{project.description}</CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <div className="flex flex-wrap gap-2 mb-4">
+                        <div className="flex flex-wrap gap-2">
                           {project.tech.map((tech) => (
                             <Badge key={tech} variant="secondary" size="sm">
                               {tech}
                             </Badge>
                           ))}
                         </div>
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors"
-                        >
-                          <Code2 size={16} />
-                          View on GitHub
-                        </a>
                       </CardContent>
                     </Card>
                   </motion.div>
