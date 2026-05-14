@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Code2, MessageSquare, Mail } from 'lucide-react';
 import { PORTFOLIO_DATA, SOCIAL_LINKS } from '@/data/portfolio';
 
 export const Footer = () => {
@@ -10,9 +10,9 @@ export const Footer = () => {
   const getIcon = (iconName: string) => {
     switch (iconName.toLowerCase()) {
       case 'github':
-        return <Github size={20} />;
+        return <Code2 size={20} />;
       case 'linkedin':
-        return <Linkedin size={20} />;
+        return <MessageSquare size={20} />;
       case 'mail':
         return <Mail size={20} />;
       default:

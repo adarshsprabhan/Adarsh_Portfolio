@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { Code2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -63,20 +63,9 @@ export const ProjectsSection = () => {
                         onClick={() => window.open(project.github, '_blank')}
                         className="flex items-center gap-2"
                       >
-                        <Github size={16} />
+                        <Code2 size={16} />
                         View Code
                       </Button>
-                      {project.demo && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => window.open(project.demo, '_blank')}
-                          className="flex items-center gap-2"
-                        >
-                          <ExternalLink size={16} />
-                          Live Demo
-                        </Button>
-                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -116,7 +105,7 @@ export const ProjectsSection = () => {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors"
                         >
-                          <Github size={16} />
+                          <Code2 size={16} />
                           View on GitHub
                         </a>
                       </CardContent>

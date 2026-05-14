@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Code2, MessageSquare, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { PORTFOLIO_DATA, SOCIAL_LINKS } from '@/data/portfolio';
 
@@ -34,8 +34,15 @@ export const HeroSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      transition: { duration: 0.8 },
     },
+  };
+
+  const getIcon = (name: string) => {
+    if (name === 'GitHub') return <Code2 size={24} />;
+    if (name === 'LinkedIn') return <MessageSquare size={24} />;
+    if (name === 'Email') return <Mail size={24} />;
+    return null;
   };
 
   return (
@@ -100,9 +107,7 @@ export const HeroSection = () => {
                 whileTap={{ scale: 0.9 }}
                 className={`text-slate-400 hover:text-white transition-colors ${link.color}`}
               >
-                {link.name === 'GitHub' && <Github size={24} />}
-                {link.name === 'LinkedIn' && <Linkedin size={24} />}
-                {link.name === 'Email' && <Mail size={24} />}
+                {getIcon(link.name)}
               </motion.a>
             ))}
           </motion.div>
