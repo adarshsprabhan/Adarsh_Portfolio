@@ -40,12 +40,12 @@ export const EXPERIENCE = [
     duration: 'Jan. 2026 – May 2026',
     description: 'Actively working on AI/NLP-driven projects leveraging advanced NLP techniques.',
     highlights: [
-      'Actively working on an AI/NLP-driven project using BERT, spaCy, and Stanza to extract, analyze, and structure unstructured text data for business insights',
-      'Applying NLP preprocessing, tokenization, entity recognition, and model fine-tuning to improve accuracy and usability of analytical outputs',
-      'Retrieve, preprocess, and analyze SQL database data to support backend and analytical functionality',
-      'Preparing meeting notes, summaries, and communication materials to support coordination across technical and business teams',
-      'Participate in Agile sprints, architectural discussions, daily stand-ups, and documentation using Git, Azure DevOps, and Jira',
-      'Assisting teams with organizing and updating documentation, file structures, and internal records to support information management activities within the division',
+      'Worked on an AI/NLP-driven project using BERT, spaCy, and Stanza to extract, analyze, and structure unstructured text data for business insights',
+      'Applied NLP preprocessing, tokenization, entity recognition, and model fine-tuning to improve accuracy and usability of analytical outputs',
+      'Retrieved, preprocess, and analyze SQL database data to support backend and analytical functionality',
+      'Prepared meeting notes, summaries, and communication materials to support coordination across technical and business teams',
+      'Participated in Agile sprints, architectural discussions, daily stand-ups, and documentation using Git, Azure DevOps, and Jira',
+      'Assisted teams with organizing and updating documentation, file structures, and internal records to support information management activities within the division',
     ],
   },
   {
