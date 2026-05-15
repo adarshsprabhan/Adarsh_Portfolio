@@ -13,8 +13,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send email using Formspree's email-based endpoint
-    const response = await fetch('https://formspree.io/aadi.aadi621@gmail.com', {
+    // Send email using Formspree form ID
+    const response = await fetch('https://formspree.io/f/xqenvwaw', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +24,6 @@ export async function POST(request: Request) {
         email: email,
         subject: subject,
         message: message,
-        _subject: subject, // Formspree uses _subject for custom subject
       }),
     });
 
