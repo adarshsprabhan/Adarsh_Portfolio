@@ -8,36 +8,36 @@ export async function POST(request: Request) {
     // Basic validation
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { success: false, message: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    // Send email using Formspree form ID
+    // Prepare form data for Formspree
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('subject', subject);
+    formData.append('message', message);
+
+    // Send email using Formspree form ID with FormData
     const response = await fetch('https://formspree.io/f/xqenvwaw', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        subject: subject,
-        message: message,
-      }),
+      body: formData,
     });
 
-    const responseText = await response.text();
+    console.log('Formspree response status:', response.status);
+    const responseData = await response.json().catch(() => ({}));
+    console.log('Formspree response data:', responseData);
 
-    if (response.ok || response.status === 200) {
+    if (response.ok) {
       return NextResponse.json({ 
         success: true, 
         message: 'Thank you! Your message has been sent successfully. I will get back to you soon!' 
       });
     } else {
-      console.error('Formspree error:', responseText);
       return NextResponse.json(
-        { success: false, message: 'Failed to send email. Please try again.' },
+        { success: false, message: 'Failed to send email. Please try again or contact via email.' },
         { status: 400 }
       );
     }
