@@ -1,48 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { PORTFOLIO_DATA, SOCIAL_LINKS } from '@/data/portfolio';
+import { useForm, ValidationError } from '@formspree/react';
 
 export const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-
-    try {
-      // Use our API route which handles form submission
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setTimeout(() => setSubmitted(false), 3000);
-      } else {
-        setError('Failed to send message. Please try again.');
-      }
-    } catch (err) {
-      setError('Error sending message. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const [state, handleSubmit] = useForm('xqenvwaw');
 
   const contactInfo = [
     { icon: Mail, label: 'Email', value: PORTFOLIO_DATA.email, href: `mailto:${PORTFOLIO_DATA.email}` },
@@ -71,8 +38,6 @@ export const ContactSection = () => {
                         type="text"
                         placeholder="Your Name"
                         name="name"
-                        value={formData.name}
-                        onChange={handleChange}
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
                         required
                       />
@@ -82,19 +47,16 @@ export const ContactSection = () => {
                         type="email"
                         placeholder="Your Email"
                         name="email"
-                        value={formData.email}
-                        onChange={handleChange}
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
                         required
                       />
+                      <ValidationError field="email" errors={state.errors} />
                     </div>
                     <div>
                       <input
                         type="text"
                         placeholder="Subject"
                         name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
                         required
                       />
@@ -103,17 +65,15 @@ export const ContactSection = () => {
                       <textarea
                         placeholder="Your Message"
                         name="message"
-                        value={formData.message}
-                        onChange={handleChange}
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors h-32 resize-none"
                         required
                       />
+                      <ValidationError field="message" errors={state.errors} />
                     </div>
-                    {error && <p className="text-red-400 text-sm">{error}</p>}
-                    {submitted && <p className="text-green-400 text-sm">✓ Message sent successfully!</p>}
-                    <Button type="submit" variant="primary" className="w-full flex items-center justify-center gap-2" disabled={isSubmitting}>
+                    {state.succeeded && <p className="text-green-400 text-sm">✓ Message sent successfully!</p>}
+                    <Button type="submit" variant="primary" className="w-full flex items-center justify-center gap-2" disabled={state.submitting}>
                       <Send size={18} />
-                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                      {state.submitting ? 'Sending...' : 'Send Message'}
                     </Button>
                   </form>
                 </CardContent>
