@@ -84,8 +84,8 @@ export const HeroSection = () => {
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex gap-4 justify-center flex-wrap">
-            <Button variant="primary" size="lg" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>
-              View My Work
+            <Button variant="primary" size="lg" onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}>
+              My Experience
             </Button>
             <Button
               variant="outline"
