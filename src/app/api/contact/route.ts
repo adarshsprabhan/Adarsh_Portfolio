@@ -13,35 +13,39 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send email via Formspree (without form ID, using email endpoint)
-    const formspreeResponse = await fetch('https://formspree.io/f/mjkbdpaz', {
+    // Send email using Formspree's email-based endpoint
+    const response = await fetch('https://formspree.io/aadi.aadi621@gmail.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Referer': process.env.NEXT_PUBLIC_SITE_URL || 'https://adarsh-portfolio-j235.vercel.app',
       },
       body: JSON.stringify({
-        name,
-        email,
-        subject,
-        message,
+        name: name,
+        email: email,
+        subject: subject,
+        message: message,
+        _subject: subject, // Formspree uses _subject for custom subject
       }),
     });
 
-    if (formspreeResponse.ok) {
-      return NextResponse.json({ success: true });
+    const responseText = await response.text();
+
+    if (response.ok || response.status === 200) {
+      return NextResponse.json({ 
+        success: true, 
+        message: 'Thank you! Your message has been sent successfully. I will get back to you soon!' 
+      });
     } else {
-      // If Formspree fails, try to send via a simple email service or log the error
-      console.error('Formspree submission failed:', formspreeResponse.status);
+      console.error('Formspree error:', responseText);
       return NextResponse.json(
-        { success: true, message: 'Form received' }, // Return success even if external service fails
-        { status: 200 }
+        { success: false, message: 'Failed to send email. Please try again.' },
+        { status: 400 }
       );
     }
   } catch (error) {
     console.error('API error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { success: false, message: 'Internal server error. Please try again later.' },
       { status: 500 }
     );
   }
