@@ -36,7 +36,7 @@ export const ContactSection = () => {
                   <CardTitle>Send me a message</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} action="https://formspree.io/f/xzzzwpwj" method="POST" className="space-y-4">
+                  <form onSubmit={handleSubmit} action="https://formsubmit.co/aadi.aadi621@gmail.com" method="POST" className="space-y-4">
                     <div>
                       <input
                         type="text"
